@@ -1,0 +1,89 @@
+﻿@model NASA.Models.Astronauta
+@{
+    ViewData["Title"] = "Agregar Astronauta";
+}
+
+<h2>Agregar Astronauta</h2>
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group mb-2">
+        <label asp-for="Cedula">Cédula</label>
+        <input asp-for="Cedula" class="form-control" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="Nombre">Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="Profesion">Profesión</label>
+        <select asp-for="Profesion" class="form-control" id="profesionSelect">
+            <option value="">-- Seleccione --</option>
+            <option value="Quimico">Químico</option>
+            <option value="Fisico">Físico</option>
+            <option value="Ingeniero">Ingeniero</option>
+        </select>
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Salario Base</label>
+        <input type="text" id="salarioBase" class="form-control" readonly
+               style="background-color: #e9ecef;" placeholder="Se calcula automáticamente" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="Correo">Correo</label>
+        <input asp-for="Correo" class="form-control" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="Genero">Género</label>
+        <select asp-for="Genero" class="form-control">
+            <option value="">-- Seleccione --</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Masculino">Masculino</option>
+        </select>
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="Telefono">Teléfono</label>
+        <input asp-for="Telefono" class="form-control" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="AniosExperiencia">Años de Experiencia</label>
+        <input asp-for="AniosExperiencia" class="form-control" type="number" min="0" />
+    </div>
+
+    <br />
+    <input type="submit" value="Guardar" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+
+    <br />
+    <br />
+    <br />
+</form>
+
+@section Scripts {
+    <script>
+        const salarios = {
+            "Quimico": "$6,000",
+            "Fisico": "$8,000",
+            "Ingeniero": "$10,000"
+        };
+
+        document.getElementById("profesionSelect").addEventListener("change", function () {
+            const profesion = this.value;
+            const salarioInput = document.getElementById("salarioBase");
+
+            if (profesion && salarios[profesion]) {
+                salarioInput.value = salarios[profesion];
+            } else {
+                salarioInput.value = "";
+            }
+        });
+    </script>
+}

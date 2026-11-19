@@ -1,0 +1,281 @@
+
+/* ==============================
+   CONFIGURACIÓN GENERAL
+================================ */
+:root {
+    --bg-main: #0B1220;
+    --bg-secondary: #111C30;
+    --bg-card: #162238;
+    --bg-input: #0F1A2D;
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --accent: #38BDF8;
+    --text-main: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --border: #263750;
+    --shadow: rgba(37, 99, 235, 0.15);
+}
+
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* ==============================
+   BODY
+================================ */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 80px;
+    padding-bottom: 60px;
+}
+
+/* ==============================
+   FOCUS
+================================ */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+    border-color: var(--accent);
+}
+
+/* ==============================
+   NAVBAR
+================================ */
+.navbar {
+    background: rgba(17, 28, 48, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+}
+
+.navbar-brand {
+    color: var(--text-main) !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+    .navbar-brand:hover {
+        color: var(--accent) !important;
+    }
+
+.nav-link {
+    color: var(--text-secondary) !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .nav-link:hover {
+        color: var(--accent) !important;
+    }
+
+/* ==============================
+   BOTONES
+================================ */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 9px 18px;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+    .btn-primary:hover {
+        background: var(--primary-hover);
+        border-color: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+    }
+
+.btn-info {
+    background: #0284C7;
+    border: 1px solid #0284C7;
+    color: white;
+}
+
+    .btn-info:hover {
+        background: #0369A1;
+        border-color: #0369A1;
+    }
+
+.btn-danger {
+    background: #DC2626;
+    border: 1px solid #DC2626;
+    color: white;
+}
+
+    .btn-danger:hover {
+        background: #B91C1C;
+        border-color: #B91C1C;
+    }
+
+/* ==============================
+   TARJETAS
+================================ */
+.card {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px var(--shadow);
+    }
+
+/* ==============================
+   TABLAS
+================================ */
+.table {
+    background: var(--bg-secondary);
+    color: var(--text-main);
+    border-color: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+    .table th {
+        background: #1E3A5F;
+        color: white;
+        font-weight: 600;
+        border-color: var(--border);
+    }
+
+    .table td {
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+        border-color: var(--border);
+        vertical-align: middle;
+    }
+
+.table-striped tbody tr:nth-of-type(odd) td {
+    background: #15243A;
+}
+
+.table tbody tr:hover td {
+    background: #1D3452;
+    color: white;
+}
+
+/* ==============================
+   FORMULARIOS
+================================ */
+.form-control,
+.form-select {
+    background: var(--bg-input);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    transition: all 0.25s ease;
+}
+
+    .form-control::placeholder {
+        color: #64748B;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background: var(--bg-input);
+        color: white;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    .form-select option {
+        background: var(--bg-secondary);
+        color: white;
+    }
+
+/* ==============================
+   PLACEHOLDERS FLOTANTES
+================================ */
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--text-secondary);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* ==============================
+   CHECKBOX
+================================ */
+.form-check-input {
+    background-color: var(--bg-input);
+    border-color: var(--border);
+}
+
+    .form-check-input:checked {
+        background-color: var(--primary);
+        border-color: var(--primary);
+    }
+
+/* ==============================
+   FOOTER
+================================ */
+footer {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 15px 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1030;
+}
+
+/* ==============================
+   SCROLLBAR
+================================ */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334968;
+    border-radius: 10px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+    }

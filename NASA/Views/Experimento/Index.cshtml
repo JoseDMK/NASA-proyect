@@ -1,0 +1,89 @@
+﻿@model IEnumerable<NASA.Models.Experimento>
+
+@{
+    ViewData["Title"] = "Gestión de Experimentos";
+}
+
+<h1>Gestión de Experimentos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar Experimento</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PoseePresupuesto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequiereRobots)
+            </th>
+            <th>Resultado</th>
+            <th>Observaciones</th>
+            <th>Nivel de Éxito</th>
+
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @item.FechaInicio.ToShortDateString()
+                </td>
+                <td>
+                    @item.FechaFin.ToShortDateString()
+                </td>
+                <td>
+                    @(item.PoseePresupuesto ? "Sí" : "No")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @(item.RequiereRobots ? "Sí" : "No")
+                </td>
+                <td>
+                    @(item.ResultadoEsperado == null
+                                    ? "Pendiente"
+                                    : (item.ResultadoEsperado == true ? "Positivo" : "Negativo"))
+            </td>
+            <td>
+                @(string.IsNullOrEmpty(item.Observaciones) ? "Sin observaciones" : item.Observaciones)
+            </td>
+            <td>
+                @item.calcularExito()
+            </td>
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { nombre = item.Nombre }) |
+
+                    @Html.ActionLink("Eliminar", "Delete", new { nombre = item.Nombre },
+                                new { onclick = "return confirm('¿Desea eliminar este experimento?')" }) |
+
+                <a asp-action="AgregarResultado" asp-route-nombre="@item.Nombre" class="btn btn-warning btn-sm">
+                    Resultado
+                </a>
+            </td>
+        </tr>
+                }
+    </tbody>
+</table>

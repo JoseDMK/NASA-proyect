@@ -1,0 +1,74 @@
+﻿@model NASA.Models.Experimento
+
+@{
+    ViewData["Title"] = "Agregar Experimento";
+}
+
+<h1>Agregar Experimento</h1>
+
+<h4>Experimento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaInicio" class="control-label"></label>
+                <input asp-for="FechaInicio" class="form-control" />
+                <span asp-validation-for="FechaInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaFin" class="control-label"></label>
+                <input asp-for="FechaFin" class="form-control" />
+                <span asp-validation-for="FechaFin" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label asp-for="PoseePresupuesto">¿Posee presupuesto?</label>
+                <select asp-for="PoseePresupuesto" class="form-control">
+                    <option value="">-- Seleccione --</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+                <span asp-validation-for="PoseePresupuesto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo">Tipo de Experimento</label>
+                <select asp-for="Tipo" class="form-control">
+                    <option value="">-- Seleccione --</option>
+                    <option value="Microgravedad">Microgravedad</option>
+                    <option value="Biología humana">Biología humana</option>
+                    <option value="Física de materiales">Física de materiales</option>
+                    <option value="Observación terrestre">Observación terrestre</option>
+                </select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label asp-for="RequiereRobots">¿Requiere robots?</label>
+                <select asp-for="RequiereRobots" class="form-control">
+                    <option value="">-- Seleccione --</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+                <span asp-validation-for="RequiereRobots" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Volver</a>
+            </div>
+            <br />
+            <br />
+            <br />
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

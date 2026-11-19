@@ -1,0 +1,89 @@
+﻿@model IEnumerable<NASA.Models.Mision>
+
+@{
+    ViewData["Title"] = "Gestion de misiones";
+
+
+    var astroMap = ViewBag.AstronautasMap as IDictionary<int, string> ?? new Dictionary<int, string>();
+    var navesMap = ViewBag.NavesMap as IDictionary<int, string> ?? new Dictionary<int, string>();
+}
+
+<h2>Gestion de misiones</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar mision</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                Astronauta 1
+            </th>
+            <th>
+                Astronauta 2
+            </th>
+            <th>
+                Astronauta 3
+            </th>
+            <th>
+                Nave
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaLanzamiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TuvoExperimentos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoTotal)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+                <td>
+                    @(astroMap.ContainsKey(item.CedulaAstronauta1)
+                                    ? astroMap[item.CedulaAstronauta1]
+                                    : "No encontrado")
+                                                  </td>
+
+                <td>
+                    @(astroMap.ContainsKey(item.CedulaAstronauta2)
+                                    ? astroMap[item.CedulaAstronauta2]
+                                    : "No encontrado")
+                                                  </td>
+
+                <td>
+                    @(astroMap.ContainsKey(item.CedulaAstronauta3)
+                                    ? astroMap[item.CedulaAstronauta3]
+                                    : "No encontrado")
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdNave) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaLanzamiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TuvoExperimentos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoTotal)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { nombre = item.Nombre }) |
+                @Html.ActionLink("Eliminar", "Delete", new { nombre = item.Nombre },
+                new { onclick = "return confirm('¿Desea eliminar esta nave?')" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

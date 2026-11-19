@@ -1,0 +1,120 @@
+﻿@model NASA.Models.Astronauta
+
+@{
+    ViewData["Title"] = "Actualizar Astronauta";
+}
+
+<h2>Actualizar Astronauta</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Cedula">Cédula</label>
+                <input asp-for="Cedula" class="form-control" readonly
+                       style="background-color: #e9ecef;" />
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Nombre">Nombre</label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Profesion">Profesión</label>
+                <select asp-for="Profesion" class="form-control" id="profesionSelect">
+                    <option value="">-- Seleccione --</option>
+                    <option value="Quimico">Químico</option>
+                    <option value="Fisico">Físico</option>
+                    <option value="Ingeniero">Ingeniero</option>
+                </select>
+                <span asp-validation-for="Profesion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Salario Base</label>
+                <input type="text" id="salarioBase" class="form-control" readonly
+                       style="background-color: #e9ecef;" placeholder="Se calcula automáticamente" />
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Correo">Correo</label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Genero">Género</label>
+                <select asp-for="Genero" class="form-control">
+                    <option value="">-- Seleccione --</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                </select>
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Telefono">Teléfono</label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="AniosExperiencia">Años de Experiencia</label>
+                <input asp-for="AniosExperiencia" class="form-control" type="number" min="0" />
+                <span asp-validation-for="AniosExperiencia" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Salario">Salario Final</label>
+                <input asp-for="Salario" class="form-control" readonly
+                       style="background-color: #e9ecef;" />
+                <small class="text-muted">Se recalcula automáticamente al guardar</small>
+            </div>
+
+            <br />
+            <input type="submit" value="Actualizar" class="btn btn-warning" />
+            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+
+            <br />
+            <br />
+            <br />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const salarios = {
+            "Quimico": "$6,000",
+            "Fisico": "$8,000",
+            "Ingeniero": "$10,000"
+        };
+
+        // Al cargar la página, mostrar el salario base según la profesión actual
+        window.onload = function () {
+            const profesionSelect = document.getElementById("profesionSelect");
+            const profesionActual = profesionSelect.value;
+            if (profesionActual && salarios[profesionActual]) {
+                document.getElementById("salarioBase").value = salarios[profesionActual];
+            }
+        };
+
+        // Al cambiar la profesión, actualizar el salario base
+        document.getElementById("profesionSelect").addEventListener("change", function () {
+            const profesion = this.value;
+            const salarioInput = document.getElementById("salarioBase");
+            if (profesion && salarios[profesion]) {
+                salarioInput.value = salarios[profesion];
+            } else {
+                salarioInput.value = "";
+            }
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

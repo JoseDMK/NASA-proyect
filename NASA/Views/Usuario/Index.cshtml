@@ -1,0 +1,42 @@
+﻿@model IEnumerable<NASA.Models.Usuario>
+
+@{
+    ViewBag.Title = "Lista de Usuarios";
+}
+
+<div class="container mt-4">
+    <h2 class="text-glow">Usuarios</h2>
+    <a asp-action="Create" class="btn btn-primary mb-3">Agregar Usuario</a>
+
+    <div class="card">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                    <th>Género</th>
+                    <th>Username</th>
+                    <th>Activo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model)
+                {
+                    <tr>
+                        <td>@u.Cedula</td>
+                        <td>@u.Nombre</td>
+                        <td>@u.Genero</td>
+                        <td>@u.Username</td>
+                        <td>@(u.Activo ? "Sí" : "No")</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-cedula="@u.Cedula" class="btn btn-info btn-sm">Editar</a>
+                            <a asp-action="Delete" asp-route-cedula="@u.Cedula" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a asp-action="ChangePassword" asp-route-cedula="@u.Cedula" class="btn btn-primary btn-sm">Contraseña</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

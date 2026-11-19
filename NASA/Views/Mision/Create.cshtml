@@ -1,0 +1,88 @@
+﻿@model NASA.Models.Mision
+
+@{
+    ViewData["Title"] = "Create";
+    var astro = ViewBag.astronautas;
+    var nav = ViewBag.naves;
+}
+
+<h1>Create</h1>
+
+<h4>Mision</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CedulaAstronauta1" class="control-label"></label>
+                <select asp-for="CedulaAstronauta1" class="form-control">
+                    <option value="">-- Seleccione --</option>
+                    @foreach (var item in astro)
+                    {
+                        <option value="@item.Cedula"> @item.Nombre </option>
+                    }
+                </select>
+                <span asp-validation-for="CedulaAstronauta1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CedulaAstronauta2" class="control-label"></label>
+                <select asp-for="CedulaAstronauta2" class="form-control">
+                    <option value="">-- Seleccione --</option>
+                    @foreach (var item in astro)
+                    {
+                        <option value="@item.Cedula"> @item.Nombre </option>
+                    }
+                </select>
+                <span asp-validation-for="CedulaAstronauta2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CedulaAstronauta3" class="control-label"></label>
+                <select asp-for="CedulaAstronauta3" class="form-control">
+                    <option value="">-- Seleccione --</option>
+                    @foreach (var item in astro)
+                    {
+                        <option value="@item.Cedula"> @item.Nombre </option>
+                    }
+                </select>
+                <span asp-validation-for="CedulaAstronauta3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdNave" class="control-label"></label>
+                <select asp-for="IdNave" class="form-control">
+                    @foreach (var item in nav)
+                    {
+                        <option value="@item.IdNave"> @item.IdNave </option>
+                    }
+                </select>
+                <span asp-validation-for="IdNave" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaLanzamiento" class="control-label"></label>
+                <input asp-for="FechaLanzamiento" type="date" class="form-control" />
+                <span asp-validation-for="FechaLanzamiento" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TuvoExperimentos" /> @Html.DisplayNameFor(model => model.TuvoExperimentos)
+                </label>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Volver</a>
+            </div>
+            <br />
+            <br />
+            <br />
+        </form>
+    </div>
+</div>
+
+ç
+

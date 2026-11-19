@@ -1,0 +1,72 @@
+﻿@model IEnumerable<NASA.Models.Astronauta>
+
+@{
+    ViewData["Title"] = "Gestión de Astronautas";
+}
+
+<h2>Gestión de Astronautas</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar Astronauta</a>
+</p>
+
+{{!-- Formulario de búsqueda --}}
+<form asp-action="Buscar" method="get">
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label>Profesión</label>
+            <select name="profesion" class="form-control">
+                <option value="">-- Todas --</option>
+                <option value="Quimico">Químico</option>
+                <option value="Fisico">Físico</option>
+                <option value="Ingeniero">Ingeniero</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label>Nombre</label>
+            <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre..." />
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-secondary w-100">Buscar</button>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <a asp-action="Index" class="btn btn-outline-secondary w-100">Limpiar</a>
+        </div>
+    </div>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Cedula)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.Profesion)</th>
+            <th>@Html.DisplayNameFor(model => model.Correo)</th>
+            <th>@Html.DisplayNameFor(model => model.Genero)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+            <th>@Html.DisplayNameFor(model => model.AniosExperiencia)</th>
+            <th>@Html.DisplayNameFor(model => model.Salario)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Cedula)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.Profesion)</td>
+                <td>@Html.DisplayFor(modelItem => item.Correo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Genero)</td>
+                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                <td>@Html.DisplayFor(modelItem => item.AniosExperiencia)</td>
+                <td>$@Html.DisplayFor(modelItem => item.Salario)</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { cedula = item.Cedula }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { cedula = item.Cedula },
+                        new { onclick = "return confirm('¿Desea eliminar este astronauta?')" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

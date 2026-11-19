@@ -1,0 +1,74 @@
+﻿@model IEnumerable<NASA.Models.Nave>
+
+@{
+    ViewData["Title"] = "Gestión de Naves";
+}
+
+<h2>Gestión de Naves</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar Nave</a>
+</p>
+
+<form asp-action="Buscar" method="get">
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label>Tipo</label>
+            <select name="tipo" class="form-control">
+                <option value="">-- Todos --</option>
+                <option value="Automatica">Automática</option>
+                <option value="Manual">Manual</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label>Capacidad</label>
+            <select name="capacidad" class="form-control">
+                <option value="">-- Todas --</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-secondary w-100">Buscar</button>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <a asp-action="Index" class="btn btn-outline-secondary w-100">Limpiar</a>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.IdNave)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.Capacidad)</th>
+            <th>@Html.DisplayNameFor(model => model.Tipo)</th>
+            <th>@Html.DisplayNameFor(model => model.FechaFabricacion)</th>
+            <th>@Html.DisplayNameFor(model => model.Aceptabilidad)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.IdNave)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.Capacidad)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                <td>@item.FechaFabricacion.ToString("yyyy-MM-dd")</td>
+                <td>@(item.Aceptabilidad ? "Apta" : "No apta")</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { idNave = item.IdNave }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { idNave = item.IdNave },
+                    new { onclick = "return confirm('¿Desea eliminar esta nave?')" })
+            </td>
+        </tr>
+                }
+    </tbody>
+</table>
